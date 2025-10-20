@@ -1,0 +1,131 @@
+<main class="home">
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="title">
+        <span class="highlight">ByteLab</span> — Learn Ethical Hacking the Smart Way
+      </h1>
+      <p class="subtitle">
+        Friendly, practical, and mentor-driven. Join weekly 30-minute sessions, explore real labs, and build cybersecurity confidence from scratch.
+      </p>
+
+      <div class="hero-ctas">
+        <a routerLink="/signup" class="btn primary">Join Free Session</a>
+        <a routerLink="/practicelab" class="btn ghost">Try a Practice Lab</a>
+      </div>
+
+      <div class="metrics" role="list" aria-label="platform metrics">
+        <div *ngFor="let s of stats" class="metric" role="listitem">
+          <fa-icon [icon]="s.icon" size="2x"></fa-icon>
+          <div class="metric-value">{{ s.value }}</div>
+          <div class="metric-label">{{ s.label }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <img src="/landing.jpg" alt="Landing" class="landing-image">
+    </div>
+
+    <canvas id="hero-bg"></canvas>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features">
+    <h2>Why ByteLab?</h2>
+    <p class="section-intro">
+      Each session focuses on real hacking skills — with labs, mentorship, and challenges to help you grow confidently.
+    </p>
+
+    <div class="feature-grid">
+      <article *ngFor="let f of features" class="feature-card">
+        <div class="icon">
+          <fa-icon [icon]="f.icon" size="2x"></fa-icon>
+        </div>
+        <h3>{{ f.title }}</h3>
+        <p>{{ f.text }}</p>
+        <img [src]="f.image" alt="{{ f.title }}" class="feature-image"
+             [ngClass]="{'certificate-img': f.title === 'Certifications'}">
+      </article>
+    </div>
+  </section>
+
+  <!-- CHALLENGES SECTION -->
+  <section class="challenges">
+  <h2>
+  <fa-icon [icon]="faFire" class="fire-icon"></fa-icon>
+  Latest Challenges
+</h2>
+
+    <p class="section-intro">
+      Test your knowledge in our interactive labs — from reconnaissance to exploitation.
+    </p>
+
+    <div class="challenge-grid">
+      <article *ngFor="let c of challenges" class="challenge-card">
+        <img [src]="c.image" alt="{{ c.title }}" class="challenge-thumb">
+        <div class="challenge-body">
+          <h4>{{ c.title }}</h4>
+          <div class="challenge-meta">
+            <span class="chip">{{ c.diff }}</span>
+            <a routerLink="/practicelab" class="link">Open Lab →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+ <!-- CALL TO ACTION -->
+<section class="cta-join">
+  <canvas id="cta-bg"></canvas>
+  <div class="cta-inner">
+    <h3>Ready to Get Hands-On?</h3>
+    <p>
+      Reserve your Monday slot and start mastering cybersecurity through guided,
+      real-world mentorship.
+    </p>
+    <a routerLink="/signup" class="btn big">Reserve Your Free Spot</a>
+    <img src="/joinus.jpg" alt="Join lab illustration" class="cta-image">
+  </div>
+</section>
+
+<!-- COMMUNITY SECTION -->
+<section class="community">
+  <canvas id="community-bg"></canvas>
+  <div class="community-inner">
+    <h2 id="dynamic-text">4.1M+ Hackers</h2>
+    <p>
+      Join a global community of learners, creators, and defenders working together
+      to make cyberspace safer.
+    </p>
+    <a routerLink="/signup" class="btn ghost">Join the Community</a>
+  </div>
+</section>
+
+<!-- BLOG SECTION -->
+<section class="blog-section">
+  <canvas id="blog-bg"></canvas>
+  <div class="blog-content">
+    <h2>
+  <fa-icon [icon]="faBullhorn" class="announce-icon"></fa-icon>
+  Latest from Our Blog
+</h2>
+
+    <p class="section-intro">
+      Insights, tutorials, and write-ups from ByteLab mentors and students.
+    </p>
+
+    <div class="blog-grid">
+      <article *ngFor="let b of blogs" class="blog-card">
+        <img [src]="b.image" alt="{{ b.title }}" class="blog-thumb">
+        <div class="blog-body">
+          <h3>{{ b.title }}</h3>
+          <p>{{ b.excerpt }}</p>
+          <a routerLink="/blog" class="link">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
