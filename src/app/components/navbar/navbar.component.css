@@ -1,22 +1,25 @@
+/* ==========================
+   NAVBAR BASE
+========================== */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 60px;
-  background: #0a0a0a; /* match home dark background */
+  background: #0a0a0a;
   color: #fff;
   position: sticky;
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 10px rgba(0,0,0,0.5);
   transition: background 0.3s ease, backdrop-filter 0.3s ease;
-  font-family: 'Source Code Pro', monospace; /* same font as home */
+  font-family: 'Source Code Pro', monospace;
 }
 
 .logo {
   font-size: 2rem;
   font-weight: 700;
-  color: #00ffdd; /* cyan accent like home highlight */
+  color: #00ffdd;
   cursor: pointer;
   text-shadow: 0 0 6px #00ffdd;
 }
@@ -32,7 +35,6 @@
   text-decoration: none;
   font-weight: 500;
   transition: 0.3s;
-  font-family: 'Source Code Pro', monospace;
 }
 
 .nav-links li a:hover,
@@ -53,7 +55,6 @@
   font-weight: 600;
   text-decoration: none;
   transition: 0.3s;
-  font-family: 'Source Code Pro', monospace;
 }
 
 .btn.login {
@@ -80,18 +81,88 @@
   backdrop-filter: blur(6px);
 }
 
+/* ==========================
+   HAMBURGER BUTTON
+========================== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 110;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #00ffdd;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Hamburger animation */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ==========================
+   MOBILE STYLES
+========================== */
 @media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px 25px;
+  .hamburger {
+    display: flex;
   }
-  .nav-links {
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 10px;
-  }
+
+  .nav-links,
   .auth-buttons {
+    display: flex;
+    flex-direction: row;        /* horizontal layout */
+    flex-wrap: wrap;            /* wrap into 1-2 rows */
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
     margin-top: 10px;
+    background: #0a0a0a;
+    max-height: 0;              /* collapsed by default */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .nav-links.open,
+  .auth-buttons.open {
+    max-height: 500px; /* adjust depending on number of items */
+    padding: 10px 0;
+  }
+
+  .nav-links li,
+  .auth-buttons a {
+    width: auto;
+    text-align: center;
+  }
+
+  .nav-links li a,
+  .auth-buttons .btn {
+    padding: 8px 15px;
+    font-size: 0.95rem;
+    display: block;
+  }
+
+  /* hover effect */
+  .nav-links li a:hover,
+  .nav-links li a.active {
+    color: #00ffdd;
+    background: rgba(0, 255, 221, 0.1);
+    border-bottom: none;
   }
 }
