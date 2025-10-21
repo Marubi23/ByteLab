@@ -1,5 +1,6 @@
-
-/* Global Styles */
+/* ==========================
+   GLOBAL STYLES
+========================== */
 body, html {
   margin: 0;
   padding: 0;
@@ -10,7 +11,9 @@ body, html {
   font-size: 16px;
 }
 
-/* Hero Section */
+/* ==========================
+   HERO SECTION
+========================== */
 .hero {
   display: flex;
   justify-content: space-between;
@@ -23,28 +26,34 @@ body, html {
 
 #hero-bg {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
   opacity: 0.25;
 }
 
-.hero-left {
+.hero-left, .hero-right {
+  position: relative;
   z-index: 1;
-  max-width: 650px;
+}
+
+.hero-left {
+  max-width: none;
   margin-top: -3rem;
+  width: 100%;
 }
 
 .hero-right {
-  z-index: 1;
-  margin-top: -15rem;
+  margin-top: 10px;
 }
 
 .hero-ctas {
   display: flex;
-  gap: 1rem; /* Adjust spacing as needed */
-  margin-top: 1.5rem; /* optional spacing from subtitle */
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .title {
@@ -60,13 +69,14 @@ body, html {
 }
 
 .subtitle {
-  font-family: 'JetBrains Mono', monospace;
   font-size: 1.5rem;
   margin-top: 1rem;
   color: #ccc;
 }
 
-/* Buttons */
+/* ==========================
+   BUTTONS
+========================== */
 .btn {
   padding: 0.85rem 1.8rem;
   border-radius: 6px;
@@ -93,7 +103,59 @@ body, html {
   opacity: 0.85;
 }
 
-/* Metrics */
+.btn.big {
+  font-size: 1.25rem;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* ==========================
+ /* ==========================
+   METRICS / STATS
+========================== */
+/* Ensure metrics are a flex container */
+.metrics {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;          /* add this */
+  max-width: none;       /* override hero-left constraints */
+  position: relative;
+  left: 0;
+}
+
+/* Left-alignment toggle */
+.metrics.left {
+  justify-content: flex-start;
+  margin-left: -20px; /* adjust as needed */
+}
+
+
+/* Right-alignment toggle (optional) */
+.metrics.right {
+  justify-content: flex-end; /* moves entire row to the right */
+  left: 0; /* reset left offset */
+}
+
+/* Individual metric labels stay aligned with their metric */
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center by default */
+}
+
+.metrics.left .metric {
+  align-items: flex-start; /* left-align labels and numbers */
+}
+
+.metrics.right .metric {
+  align-items: flex-end; /* right-align labels and numbers */
+}
+
+/* Metric values and labels styling */
 .metric-value {
   font-weight: 700;
   font-size: 1.75rem;
@@ -105,12 +167,14 @@ body, html {
   font-size: 1rem;
   margin-top: 0.25rem;
 }
-/* =====================
+
+
+/* ==========================
    FEATURES SECTION
-===================== */
+========================== */
 .features {
   padding: 6rem 5%;
-  background: #0a0a0a; /* same dark theme */
+  background: #0a0a0a;
 }
 
 .features h2 {
@@ -120,29 +184,18 @@ body, html {
   color: #00ffdd;
   margin-bottom: 1rem;
 }
-.feature-grid h3{
-  color: white;
-}
 
 .features .section-intro {
   font-size: 1.3rem;
   color: #ccc;
   margin-bottom: 2rem;
 }
-.feature-image {
-  width: 100%;         /* take full width of card */
-  max-width: 300px;    /* limit maximum size */
-  height: auto;        /* keep aspect ratio */
-  border-radius: 10px;
-  object-fit: cover;
-  display: block;
-  margin-top: 1rem;    /* optional spacing from text */
-}
 
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .feature-card {
@@ -168,6 +221,7 @@ body, html {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  color: #fff;
 }
 
 .feature-card p {
@@ -175,12 +229,22 @@ body, html {
   color: #aaa;
 }
 
-/* =====================
+.feature-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+  margin-top: 1rem;
+}
+
+/* ==========================
    CHALLENGES SECTION
-===================== */
+========================== */
 .challenges {
   padding: 6rem 5%;
-  background: #0f0f0f; /* subtle shift to differentiate sections */
+  background: #0f0f0f;
 }
 
 .challenges h2 {
@@ -200,6 +264,7 @@ body, html {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .challenge-card {
@@ -215,8 +280,8 @@ body, html {
 }
 
 .challenge-thumb {
-  width: 0%;
-  height: 10px;
+  width: 100%;
+  height: 180px;
   object-fit: cover;
 }
 
@@ -243,7 +308,7 @@ body, html {
   color: #1cb49f;
   padding: 3px 8px;
   border-radius: 6px;
-  font-size: 1.50rem;
+  font-size: 1.5rem;
   font-weight: 800;
 }
 
@@ -251,16 +316,15 @@ body, html {
   color: #00ffdd;
   font-weight: 600;
   text-decoration: none;
-
 }
 
 .challenge-meta .link:hover {
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
-/* =====================
+/* ==========================
    CALL TO ACTION
-===================== */
+========================== */
 .cta-join {
   padding: 6rem 5%;
   background: #0a0a0a;
@@ -272,8 +336,10 @@ body, html {
 
 #cta-bg {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
   opacity: 0.25;
@@ -292,105 +358,17 @@ body, html {
   margin-bottom: 2rem;
 }
 
-.cta-join .btn.big {
-  font-size: 1.25rem;
-  padding: 1rem 2rem;
-  background: #00ffdd;
-  color: #0a0a0a;
-  border-radius: 6px;
-  font-weight: 600;
-}
-
-.cta-join .btn.big:hover {
-  background: #00e6cc;
-}
-
 .cta-join .cta-image {
+  display: block;
   margin-top: 2rem;
   height: 400px;
   max-width: 400px;
   width: 100%;
 }
 
-.cta-image {
-  display: block;
-  margin-top: 2rem; /* space between button and image */
-  width: 260px;
-  max-width: 100%;
-}
-
-/* Grid Layouts */
-.feature-grid, .challenge-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-.announce-icon {
-  color: #00ffdd;
-  margin-right: 10px;
-  animation: speakerPulse 1.5s infinite ease-in-out;
-}
-
-@keyframes speakerPulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.7;
-  }
-}
-
-
-/* Section Intro */
-.section-intro {
-  margin-bottom: 1.5rem;
-  color: #aaa;
-  font-size: 1.2rem;
-}
-.fire-icon {
-  color: #ff4500; /* bright flame color */
-  margin-right: 10px;
-  animation: firePulse 1.2s infinite ease-in-out;
-}
-
-@keyframes firePulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.25);
-    opacity: 0.75;
-  }
-}
-
-
-/* Images */
-.landing-image, .feature-image, .challenge-thumb {
-  width: 600px;
-  height: 500px;
-  border-radius: 10px;
-  object-fit: cover;
-}
-.certificate-img {
-  width: 920px;
-  height: 200px;
-  display: block;
-  margin: 0 auto;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 255, 221, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.certificate-img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(0, 255, 221, 0.3);
-}
-/* =====================
-  /* COMMUNITY SECTION */
+/* ==========================
+   COMMUNITY SECTION
+========================== */
 .community {
   background: #0a0a0a;
   text-align: center;
@@ -402,8 +380,10 @@ body, html {
 
 #community-bg {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
   opacity: 0.25;
@@ -422,7 +402,9 @@ body, html {
   margin-bottom: 2rem;
 }
 
-/* BLOG SECTION */
+/* ==========================
+   BLOG SECTION
+========================== */
 .blog-section {
   position: relative;
   padding: 6rem 5%;
@@ -432,8 +414,10 @@ body, html {
 
 #blog-bg {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
   opacity: 0.25;
@@ -509,13 +493,59 @@ body, html {
   text-decoration: underline;
 }
 
-/* Foreground content */
-.cta-inner, .community-inner, .blog-content {
-  position: relative;
-  z-index: 2;
+/* ==========================
+   ICON ANIMATIONS
+========================== */
+.announce-icon {
+  color: #00ffdd;
+  margin-right: 10px;
+  animation: speakerPulse 1.5s infinite ease-in-out;
 }
 
-/* Dynamic text typing effect */
+@keyframes speakerPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+.fire-icon {
+  color: #ff4500;
+  margin-right: 10px;
+  animation: firePulse 1.2s infinite ease-in-out;
+}
+
+@keyframes firePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0.75; }
+}
+
+/* ==========================
+   IMAGES
+========================== */
+.landing-image, .feature-image, .challenge-thumb {
+  width: 600px;
+  height: 500px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.certificate-img {
+  width: 920px;
+  height: 200px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 255, 221, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certificate-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 255, 221, 0.3);
+}
+
+/* ==========================
+   DYNAMIC TEXT
+========================== */
 #dynamic-text {
   font-family: 'Orbitron', sans-serif;
   color: #00ffdd;
@@ -532,9 +562,77 @@ body, html {
   to { border-color: #00ffdd; }
 }
 
-/* small responsiveness fixes */
+/* ==========================
+   RESPONSIVE
+========================== */
 @media (max-width: 960px) {
-  .hero { flex-direction: column; padding: 4rem 3%; }
-  .hero-right { margin-top: 0; }
-  .landing-image, .feature-image, .challenge-thumb { width: 100%; height: auto; }
+  .hero {
+    flex-direction: column;
+    padding: 4rem 3%;
+  }
+
+  .hero-right {
+    margin-top: 0;
+  }
+
+  .landing-image, .feature-image, .challenge-thumb {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* ==========================
+   ADDITIONS / ENHANCEMENTS
+========================== */
+
+/* HERO BACKGROUND GLOW */
+#hero-bg {
+  filter: drop-shadow(0 0 15px #00ffdd);
+  opacity: 0.3;
+}
+
+/* BUTTON GLOW */
+.btn.primary {
+  box-shadow: 0 0 8px #00ffdd88;
+}
+.btn.big {
+  box-shadow: 0 0 12px #00ffdd33;
+}
+
+/* FEATURE CARD HOVER ENHANCEMENT */
+.feature-card:hover {
+  box-shadow: 0 0 15px rgba(0, 255, 221, 0.4);
+}
+
+/* CHALLENGE CARD HOVER ENHANCEMENT */
+.challenge-card:hover {
+  box-shadow: 0 0 12px rgba(0, 255, 221, 0.4);
+}
+
+/* BLOG CARD HOVER ENHANCEMENT */
+.blog-card:hover {
+  box-shadow: 0 0 15px rgba(0, 255, 221, 0.4);
+}
+
+/* IMAGE GLOW AND HOVER */
+.landing-image, .feature-image, .challenge-thumb {
+  box-shadow: 0 0 15px #00ffdd22;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.landing-image:hover, .feature-image:hover, .challenge-thumb:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px #00ffdd44;
+}
+
+/* DYNAMIC TEXT IMPROVEMENT */
+#dynamic-text {
+  text-shadow: 0 0 8px #00ffdd55;
+}
+
+/* HERO CTAS HOVER GLOW */
+.hero-ctas .btn {
+  transition: 0.3s, box-shadow 0.3s;
+}
+.hero-ctas .btn:hover {
+  box-shadow: 0 0 12px #00ffdd44;
 }

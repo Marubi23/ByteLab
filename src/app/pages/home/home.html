@@ -14,13 +14,14 @@
         <a routerLink="/practicelab" class="btn ghost">Try a Practice Lab</a>
       </div>
 
-      <div class="metrics" role="list" aria-label="platform metrics">
-        <div *ngFor="let s of stats" class="metric" role="listitem">
-          <fa-icon [icon]="s.icon" size="2x"></fa-icon>
-          <div class="metric-value">{{ s.value }}</div>
-          <div class="metric-label">{{ s.label }}</div>
+       <div class="metrics left" role="list" aria-label="platform metrics">
+          <div *ngFor="let s of stats" class="metric" role="listitem">
+         <fa-icon [icon]="s.icon" size="2x"></fa-icon>
+        <div class="metric-value">{{ s.value }}</div>
+         <div class="metric-label">{{ s.label }}</div>
         </div>
-      </div>
+</div>
+
     </div>
 
     <div class="hero-right">

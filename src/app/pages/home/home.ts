@@ -12,7 +12,7 @@ import {
   faUserShield,
   faGlobe,
   faFire,
-  faBullhorn,      // <-- added announcement icon
+  faBullhorn,
   faCertificate
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,30 +32,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   features = [
-    {
-      icon: faLaptopCode,
-      title: 'Practical Labs',
-      text: 'Get hands-on cybersecurity experience in safe virtual environments.',
-      image: '/handsonlab.jpg'
-    },
-    {
-      icon: faUserShield,
-      title: 'Guided Mentorship',
-      text: 'Learn from cybersecurity professionals step-by-step through your journey.',
-      image: '/business.jpg'
-    },
-    {
-      icon: faGlobe,
-      title: 'Global Community',
-      text: 'Join a worldwide network of learners and defenders sharing insights and wins.',
-      image: '/community.jpg'
-    },
-    {
-      icon: faCertificate,
-      title: 'Certifications',
-      text: 'Earn certificates that showcase your cybersecurity expertise.',
-      image: '/cert.JPG'
-    }
+    { icon: faLaptopCode, title: 'Practical Labs', text: 'Get hands-on cybersecurity experience in safe virtual environments.', image: '/handsonlab.jpg' },
+    { icon: faUserShield, title: 'Guided Mentorship', text: 'Learn from cybersecurity professionals step-by-step through your journey.', image: '/business.jpg' },
+    { icon: faGlobe, title: 'Global Community', text: 'Join a worldwide network of learners and defenders sharing insights and wins.', image: '/community.jpg' },
+    { icon: faCertificate, title: 'Certifications', text: 'Earn certificates that showcase your cybersecurity expertise.', image: '/cert.JPG' }
   ];
 
   challenges = [
@@ -65,27 +45,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   blogs = [
-    {
-      image: '/top10.JPG',
-      title: 'Top 10 Hacking Labs for Beginners',
-      excerpt: 'Start your cybersecurity journey with these beginner-friendly platforms.'
-    },
-    {
-      image: '/security.jpg',
-      title: 'Mastering Web Application Security',
-      excerpt: 'Explore OWASP top 10 vulnerabilities and how to defend against them.'
-    },
-    {
-      image: '/helphand.JPG',
-      title: 'How to Build a Career in Cybersecurity',
-      excerpt: 'Your step-by-step guide from newbie to professional ethical hacker.'
-    }
+    { image: '/top10.JPG', title: 'Top 10 Hacking Labs for Beginners', excerpt: 'Start your cybersecurity journey with these beginner-friendly platforms.' },
+    { image: '/security.jpg', title: 'Mastering Web Application Security', excerpt: 'Explore OWASP top 10 vulnerabilities and how to defend against them.' },
+    { image: '/helphand.JPG', title: 'How to Build a Career in Cybersecurity', excerpt: 'Your step-by-step guide from newbie to professional ethical hacker.' }
   ];
 
-  // Announcement icon property for template
   faBullhorn = faBullhorn;
   faFire = faFire;
-
 
   // ===== animation / canvas state =====
   private rafHandles: number[] = [];
@@ -99,36 +65,29 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.startDynamicTextCycle();
-
-    ['hero-bg', 'cta-bg', 'community-bg', 'blog-bg'].forEach(id => {
-      this.initCanvasAnimation(id);
-    });
+    this.initHeroDNAAnimation();
+    ['cta-bg', 'community-bg', 'blog-bg'].forEach(id => this.initCanvasAnimation(id));
   }
 
   ngOnDestroy(): void {
     this.rafHandles.forEach(h => cancelAnimationFrame(h));
     this.rafHandles = [];
-
     this.resizeHandlers.forEach(fn => window.removeEventListener('resize', fn));
     this.resizeHandlers = [];
-
     if (this.dynamicTimer) clearInterval(this.dynamicTimer);
     this.dynamicDeleteTimers.forEach(t => clearInterval(t));
     this.dynamicDeleteTimers = [];
   }
 
   // -------------------------
-  // Dynamic text typing + delete
+  // Dynamic text typing
   // -------------------------
   private startDynamicTextCycle() {
     const el = document.getElementById('dynamic-text');
     if (!el) return;
-
     const words = ['Hackers', 'Students', 'Learners', 'Defenders'];
     let index = 0;
-
     el.textContent = `4.1M+ ${words[index]}`;
-
     const cycle = () => {
       const currentWord = words[index];
       const nextWord = words[(index + 1) % words.length];
@@ -137,34 +96,26 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       let i = text.length;
       const deleteSpeed = 60;
       const del = setInterval(() => {
-        if (i > base.length) {
-          i--;
-          el.textContent = text.slice(0, i);
-        } else {
+        if (i > base.length) { i--; el.textContent = text.slice(0, i); } 
+        else {
           clearInterval(del);
           const full = `${base}${nextWord}`;
           let j = el.textContent ? el.textContent.length : base.length;
           const typeSpeed = 75;
           const type = setInterval(() => {
-            if (j <= full.length) {
-              el.textContent = full.slice(0, j++);
-            } else {
-              clearInterval(type);
-              index = (index + 1) % words.length;
-              setTimeout(cycle, 1900);
-            }
+            if (j <= full.length) { el.textContent = full.slice(0, j++); } 
+            else { clearInterval(type); index = (index + 1) % words.length; setTimeout(cycle, 1900); }
           }, typeSpeed);
           this.dynamicDeleteTimers.push(type);
         }
       }, deleteSpeed);
       this.dynamicDeleteTimers.push(del);
     };
-
     this.dynamicTimer = setTimeout(cycle, 2200);
   }
 
   // -------------------------
-  // Canvas particle animation
+  // General background particles
   // -------------------------
   initCanvasAnimation(id: string) {
     const canvas = document.getElementById(id) as HTMLCanvasElement | null;
@@ -174,9 +125,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const resize = () => {
       const parent = canvas.parentElement;
-      const height = parent ? parent.clientHeight : 320;
       canvas.width = Math.max(window.innerWidth, 300);
-      canvas.height = Math.max(height, 180);
+      canvas.height = Math.max(parent?.clientHeight ?? 180, 180);
     };
     resize();
     const onResize = () => resize();
@@ -198,21 +148,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     const draw = () => {
-      const w = canvas.width;
-      const h = canvas.height;
-
+      const w = canvas.width, h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      const grad = ctx.createRadialGradient(w / 2, h / 2, 10, w / 2, h / 2, Math.max(w, h));
-      grad.addColorStop(0, 'rgba(0,0,0,0.0)');
-      grad.addColorStop(1, 'rgba(0,0,0,0.15)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, w, h);
-
       for (const n of nodes) {
-        n.x += n.vx;
-        n.y += n.vy;
-
+        n.x += n.vx; n.y += n.vy;
         if (n.x < -10) n.x = w + 10;
         if (n.x > w + 10) n.x = -10;
         if (n.y < -10) n.y = h + 10;
@@ -226,15 +166,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i];
-          const b = nodes[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < Math.min(140, Math.max(80, canvas.width / 10))) {
-            const op = 0.06 + (1 - dist / 140) * 0.12;
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y, dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 120) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0,255,180,${op})`;
+            ctx.strokeStyle = `rgba(0,255,180,${1 - dist/120})`;
             ctx.lineWidth = 1;
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -246,7 +182,68 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       const raf = requestAnimationFrame(draw);
       this.rafHandles.push(raf);
     };
+    draw();
+  }
 
+  // -------------------------
+  // Hero DNA animation
+  // -------------------------
+  private initHeroDNAAnimation() {
+    const canvas = document.getElementById('hero-bg') as HTMLCanvasElement;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const resize = () => {
+      canvas.width = canvas.parentElement?.clientWidth ?? window.innerWidth;
+      canvas.height = canvas.parentElement?.clientHeight ?? 400;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    this.resizeHandlers.push(resize);
+
+    const particles: {x: number, y: number, phase: number, color: string}[] = [];
+    const num = 120;
+    const colors = ['#00ffdd','#00bfa5','#00e6cc'];
+    for(let i=0;i<num;i++){
+      particles.push({
+        x: i*6,
+        y: canvas.height/2,
+        phase: Math.random()*Math.PI*2,
+        color: colors[i%colors.length]
+      });
+    }
+
+    const draw = () => {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      // Draw helix
+      for(let i=0;i<particles.length;i++){
+        const p = particles[i];
+        p.phase += 0.02;
+        const amp = 60;
+        const centerX = canvas.width/2;
+        const centerY = canvas.height/2;
+        const x = centerX + Math.sin(p.phase)*amp;
+        const y = centerY + (i-particles.length/2)*3;
+        ctx.beginPath();
+        ctx.fillStyle = p.color;
+        ctx.arc(x,y,3,0,Math.PI*2);
+        ctx.fill();
+        // Connect with line to next particle
+        if(i<particles.length-1){
+          const next = particles[i+1];
+          const nx = centerX + Math.sin(next.phase)*amp;
+          const ny = centerY + (i+1-particles.length/2)*3;
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(0,255,180,0.2)';
+          ctx.lineWidth = 1;
+          ctx.moveTo(x,y);
+          ctx.lineTo(nx,ny);
+          ctx.stroke();
+        }
+      }
+      requestAnimationFrame(draw);
+    };
     draw();
   }
 }
